@@ -15,7 +15,7 @@ I have implemented 2 class to manage the dataset
 
 #### `class Dataset`
 
-This class takes care of loading in memory all the data, this approach result feasible due to the limited size of the dataset. Loading all the data in memory simplify the process of working with data. The class has also the task of splitting the training data into the training set and validation set with a coefficient of `0.2` \(no cross validation with k-fold is used\) and encoding the category with one-hot convention.
+This class takes care of loading in memory all the data, this approach results feasible due to the limited size of the dataset. Loading all the data in memory simplifies the process of working with data. The class has also the task of splitting the training data into the training set and validation set with a coefficient of `0.2` \(no cross validation with k-fold is used\) and encoding the category with one-hot convention.
 
 #### `class DatasetGenerator`
 
@@ -23,11 +23,11 @@ This class provides generator for the three datasets: It takes the dataset loade
 
 ### `class Experiment`
 
-I have implemented another helper class to automatize some useful task, in order to speed up the process of testing new network configurations. The class is responsible of handling the making of result file and all the other output file like checkpoints and `tensorboard` log.
+I have implemented another helper class to automatize some useful tasks, in order to speed up the process of testing new network configurations. The class is responsible for handling the making of result file and all the other output file like checkpoints and `tensorboard` log.
 
 ### CCN
 
-As first approach I have tried to build a classical homemade CNN to test and to improve the helping class. I have used a simple CNN, after some experiments i found a good configuration in a depth of 8 macro layers and a dense layer of classifier of `512` nodes. To achieve a good result I have needed to add to my network a dropout layer in combination with a policy of early stopping in order to avoid overfitting.
+As first approach I tried to build a classical homemade CNN to test and to improve the helping class. I used a simple CNN, after some experiments i found a good configuration in a depth of 8 macro layers and a dense layer of classifier of `512` nodes. To achieve a good result I needed to add a dropout layer to my model in combination with a policy of early stopping in order to avoid overfitting.
 
 I soon abandoned this approach in favour of transfer learning approach in order to reduce the disadvantage of a small training dataset.
 
@@ -61,6 +61,6 @@ So, I changed the categories' codification in this way:
 'all wearing a mask'        -> (1,1)
 ```
 
-and I add a bias layer to avoid the possibility of classify some data as `(0,1)` in this way I have explicated the ordered relation among categories.
+and I add a bias layer to avoid the possibility of classify some data as `(0,1)` in this way I have explicated the ordered relation among categories. Due to these changes I have to change also the loss function and metrics, because the `accuracy` and `CategoricalCrossentropy` lose their meaning, so I have used `BinaryAccuracy` and `binary_crossentropy`, and activation function of the model output from `softmax` to `sigmoid`.
 
 With this approach I reach a best accuracy of `0.90222` on the test dataset with a model based on `VGG19` trained on `imagenet`, you can find the code in `tl_ordered_vgg19.ipynb` file. I think that a better result could be achieved further explore this approach.
