@@ -63,4 +63,4 @@ So, I changed the categories' codification in this way:
 
 and I added a bias layer to avoid the possibility of classify some data as `(0,1)` in this way I have explicated the ordered relation among categories. Due to these changes I had to change also the loss function and metrics, because the `accuracy` and `CategoricalCrossentropy` lose their meaning, so I used `BinaryAccuracy` and `binary_crossentropy`, and I changed activation function of the model output from `softmax` to `sigmoid`.
 
-With this approach I reached a best accuracy of `0.90222` on the test dataset with a model based on `VGG19` trained on `imagenet`; you can find the code in `tl_ordered_vgg19.ipynb` file. I think that a better result could be achieved further explore this approach.
+With this approach I reached a best accuracy of `0.90222` on the test dataset with a model based on `VGG19` trained on `imagenet`; you can find the code in `tl_ordered_vgg19.ipynb` file. I think that a better result could be achieved with further exploration of this approach.
