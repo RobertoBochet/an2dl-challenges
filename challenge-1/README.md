@@ -9,13 +9,13 @@ We have to classify images in one of three category:
 
 ### Managing dataset
 
-As first approach i have tried to reach a sufficient result exploiting a home made CCN to understand the best way to manage the datasets.
+As first approach I have tried to reach a sufficient result exploiting a home made CCN to understand the best way to manage the datasets.
 
 I have implemented 2 class to manage the dataset
 
 #### `class Dataset`
 
-This class takes care of load in memory all the data, this approach result feasible due to the limited size of the dataset. Loading all the data in memory simplify the process of working with data. The class has also the task of splitting the training data into the training set and validation set with a coefficient of `0.2` \(no cross validation with k-fold is used\) and encoding the category with one-hot convention.
+This class takes care of loading in memory all the data, this approach result feasible due to the limited size of the dataset. Loading all the data in memory simplify the process of working with data. The class has also the task of splitting the training data into the training set and validation set with a coefficient of `0.2` \(no cross validation with k-fold is used\) and encoding the category with one-hot convention.
 
 #### `class DatasetGenerator`
 
@@ -27,7 +27,7 @@ I have implemented another helper class to automatize some useful task, in order
 
 ### CCN
 
-As first approach I have tried to build a classical homemade CNN to test and to improve the helping class. I have used a simple CNN, after some experiments i found a good configuration in a depth of 8 macro layers and a dense layer of classifier of `512` nodes. To achieve a good result i have needed to add to my network a dropout layer in combination with a policy of early stopping in order to avoid overfitting.
+As first approach I have tried to build a classical homemade CNN to test and to improve the helping class. I have used a simple CNN, after some experiments i found a good configuration in a depth of 8 macro layers and a dense layer of classifier of `512` nodes. To achieve a good result I have needed to add to my network a dropout layer in combination with a policy of early stopping in order to avoid overfitting.
 
 I soon abandoned this approach in favour of transfer learning approach in order to reduce the disadvantage of a small training dataset.
 
@@ -37,12 +37,12 @@ I tried different type of pretrained network, all of these trained on `imagenet`
 
 #### The naive approach
 
-With the use of generic pretrained model after several test i found a model based on `VGG16` to reach a score of `0.88888` on test dataset, you can find the code in `tl_vgg16.ipynb` file.
+With the use of generic pretrained model after several tests I found a model based on `VGG16` to reach a score of `0.88888` on test dataset, you can find the code in `tl_vgg16.ipynb` file.
 
 #### PT model with specific dataset
 
 After the result with a model gotten from transfer learning, exploiting a model trained with generic dataset, I have tried to use a pretrained model trained to do a specific task similar to our problem.
-So, i found several ML projects with the aim to identify people wearing a mask in a photo. I chose [Face-Mask-Detection](https://github.com/chandrikadeb7/Face-Mask-Detection) from github user `chandrikadeb7` and I use his pretrained model as substitution of the VGG16 used in the previous step. It used a model based on `MobileNetv2`. Unfortunately also before several tries I have not found a configuration of the parameter and classifier that reach a better score than the previous one. This can be bound to the fact that in the original project the model works only on the preprocessed image where the face to classify is already detect with another ML algorithm of face detection.
+So, I found several ML projects with the aim to identify people wearing a mask in a photo. I chose [Face-Mask-Detection](https://github.com/chandrikadeb7/Face-Mask-Detection) from github user `chandrikadeb7` and I use his pretrained model as substitution of the VGG16 used in the previous step. It used a model based on `MobileNetv2`. Unfortunately also before several tries I have not found a configuration of the parameter and classifier that reach a better score than the previous one. This can be bound to the fact that in the original project the model works only on the preprocessed image where the face to classify is already detect with another ML algorithm of face detection.
 
 #### Explicit order for the categories
 
